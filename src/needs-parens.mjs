@@ -128,9 +128,14 @@ function needsParens(path, options) {
     }
     case "clone":
     case "new": {
+      // Parentheses around `new` with member access are only optional on
+      // PHP >= 8.4. When the PHP version is just a guess (default "auto"
+      // without a composer.json), stay conservative and keep them so the
+      // output stays valid on older PHP versions (see #2440).
       const requiresParens =
         node.kind === "clone" ||
-        (node.kind === "new" && options.phpVersion < 8.4);
+        (node.kind === "new" &&
+          (options.phpVersion < 8.4 || options.phpVersionIsGuessed));
       switch (parent.kind) {
         case "propertylookup":
         case "nullsafepropertylookup":

@@ -17,6 +17,9 @@ $bar = 'MyClassName';
 $foo = new $bar;
 $foo = new $bar();
 
+// https://github.com/prettier/plugin-php/issues/2440
+$timestamp = (new DateTimeImmutable())->format(DATE_ATOM);
+
 abstract class A
 {
     public static function create()
@@ -210,6 +213,9 @@ $c = new Foo([1, 2, 3], "foo", $variable);
 $bar = "MyClassName";
 $foo = new $bar();
 $foo = new $bar();
+
+// https://github.com/prettier/plugin-php/issues/2440
+$timestamp = (new DateTimeImmutable())->format(DATE_ATOM);
 
 abstract class A
 {
@@ -453,6 +459,9 @@ $bar = 'MyClassName';
 $foo = new $bar;
 $foo = new $bar();
 
+// https://github.com/prettier/plugin-php/issues/2440
+$timestamp = (new DateTimeImmutable())->format(DATE_ATOM);
+
 abstract class A
 {
     public static function create()
@@ -647,6 +656,9 @@ $bar = "MyClassName";
 $foo = new $bar();
 $foo = new $bar();
 
+// https://github.com/prettier/plugin-php/issues/2440
+$timestamp = (new DateTimeImmutable())->format(DATE_ATOM);
+
 abstract class A
 {
     public static function create()
@@ -656,12 +668,12 @@ abstract class A
     }
 }
 
-$class = new Foo()->veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongMethod();
-$class = new Foo([
+$class = (new Foo())->veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongMethod();
+$class = (new Foo([
     "VeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey" =>
         "VeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue",
-])->veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongMethod();
-$class = new PendingDispatch(new $this->class(...func_get_args()))->chain(
+]))->veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongMethod();
+$class = (new PendingDispatch(new $this->class(...func_get_args())))->chain(
     $this->chain,
 );
 $dumper = in_array(PHP_SAPI, ["cli", "phpdbg"])
@@ -678,7 +690,7 @@ $class = new static(
 $response = new \\Illuminate\\Http\\JsonResponse(
     new JsonResponseTestJsonSerializeObject(),
 );
-$result = new Pipeline(new \\Illuminate\\Container\\Container())
+$result = (new Pipeline(new \\Illuminate\\Container\\Container()))
     ->send("foo")
     ->through([new PipelineTestPipeOne()])
     ->then(function ($piped) {

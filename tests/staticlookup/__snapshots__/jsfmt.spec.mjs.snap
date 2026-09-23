@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`single.php 1`] = `
 ====================================options=====================================
@@ -344,7 +344,7 @@ $var = $var[0]::foo;
 $var = $var[0][1]::foo;
 $var = $var[0][1]::foo;
 $var = $var[0][1]::foo;
-$var = new Foo()::bar;
+$var = (new Foo())::bar;
 $var = Foo::$bar["baz"]();
 $var = Foo::$bar["baz"]();
 $var = Foo::{$bar["baz"]}();

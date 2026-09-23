@@ -8,6 +8,9 @@ $bar = 'MyClassName';
 $foo = new $bar;
 $foo = new $bar();
 
+// https://github.com/prettier/plugin-php/issues/2440
+$timestamp = (new DateTimeImmutable())->format(DATE_ATOM);
+
 abstract class A
 {
     public static function create()

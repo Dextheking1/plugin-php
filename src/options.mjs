@@ -87,8 +87,13 @@ export function resolvePhpVersion(options) {
     return;
   }
   if (options.phpVersion === "auto") {
-    options.phpVersion =
-      getComposerPhpVersion() ?? LATEST_SUPPORTED_PHP_VERSION;
+    const composerVersion = getComposerPhpVersion();
+    options.phpVersion = composerVersion ?? LATEST_SUPPORTED_PHP_VERSION;
+    // Without a composer.json pinning a PHP version, "auto" falls back to
+    // the latest supported version, which is only a guess. Remember that
+    // so the printer stays conservative and never emits syntax that is
+    // invalid on older PHP versions (see #2440).
+    options.phpVersionIsGuessed = composerVersion === null;
   } else if (options.phpVersion === "composer") {
     const v = getComposerPhpVersion();
     if (v === null) {
