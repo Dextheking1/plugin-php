@@ -192,7 +192,12 @@ function needsParens(path, options) {
         case "bin":
         case "retif":
           if (key === "test" && !parent.trueExpr) {
-            return false;
+            // A shorthand ternary flattens safely (`($a ?: $b) ?: $c` ->
+            // `$a ?: $b ?: $c`), but a full ternary used as the condition
+            // of `?:` must keep its parentheses: `a ? b : c ?: d` is a
+            // fatal error in PHP 8.
+            // https://github.com/prettier/plugin-php/issues/2115
+            return node.trueExpr !== null;
           }
 
           return true;
