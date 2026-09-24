@@ -59,3 +59,10 @@ match ($a) {
 match($really_really_really_really_really_really_really_really_long_variable_name) {
 default => null
 };
+
+// https://github.com/prettier/plugin-php/issues/2435
+// When the conditions of a match arm break onto multiple lines, the body
+// on the indented `=>` line must keep the extra indent for its own breaks.
+echo match ($operation) {
+    "short", "really very long option 2" => SomeClass::fairlyLongMethodNameThatRunsOn($variable, ["short", "short"]),
+};
